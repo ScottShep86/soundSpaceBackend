@@ -32,9 +32,13 @@ router.post("/signup/record-label", async (req, res) => {
     // hash the password
     const hashPassword = bcryptjs.hashSync(req.body.password, salt);
     await RecordLabel.create({
+      companyName: req.body.companyName,
       email: req.body.email,
       password: hashPassword,
-      name: req.body.name,
+      logo: req.body.logo,
+      location: req.body.location,
+      aboutUs: req.body.aboutUs,
+      associatedActs: req.body.associatedActs
     });
     res.status(201).json({ message: "New record label created" });
   } catch (error) {

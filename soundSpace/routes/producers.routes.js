@@ -1,18 +1,24 @@
 const router = require("express").Router();
-const axios = require('axios')
+const Producer = require('../models/Producer.model');
 
-// GET all the producers from the DB
-router.get('/api/producers', async (req, res, next) => {
-  axios.get()
-  
-  
+//GET all producers
+router.get("/producers", async (req, res, next) => {
     try {
-    const producers = await Producer.find();
-    res.json(producers);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal server error' })
-  }
-});
+        const response = await Producer.find();
+        res.send({ data: response });
+    } catch (error) {
+        console.error(error)
+    }
+})
+
+//GET one producer
+router.get("/producers/:producerId", async (req, res) => {
+    try {
+        const producer = await Producer.findById(req.params.producerId)
+        res.status(200).json(producer)
+    } catch (error) {
+        console.error(error)
+    }
+})
 
 module.exports = router;

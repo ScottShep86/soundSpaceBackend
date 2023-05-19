@@ -32,9 +32,14 @@ router.post("/signup/producer", async (req, res) => {
     // hash the password
     const hashPassword = bcryptjs.hashSync(req.body.password, salt);
     await Producer.create({
+      name: req.body.name,
       email: req.body.email,
       password: hashPassword,
-      name: req.body.name,
+      picture: req.body.picture,
+      location: req.body.location,
+      aboutMe: req.body.aboutMe,
+      associatedActs: req.body.associatedActs,
+      genre: req.body.genre,
     });
     res.status(201).json({ message: "New producer created" });
   } catch (error) {
