@@ -1,10 +1,10 @@
 const { Schema, model } = require("mongoose");
 
-const recordLabelSchema = new Schema(
+const producerSchema = new Schema(
   {
-    companyName: {
+    name: {
       type: String,
-      required: [true, 'A company name is required.']
+      required: [true, 'A name is required.']
     },
     email: {
       type: String,
@@ -17,11 +17,11 @@ const recordLabelSchema = new Schema(
       type: String,
       required: [true, 'A password is required.']
     },
-    Picture: {
+    picture: {
       type: String,
       required: false
     },
-    Location: {
+    location: {
       type: String,
     },
     aboutMe: {
@@ -41,6 +41,6 @@ const recordLabelSchema = new Schema(
   }
 );
 
-const User = model("User", userSchema);
+const Producer = model("Producer", producerSchema);
 
-module.exports = User;
+module.exports = Producer;
