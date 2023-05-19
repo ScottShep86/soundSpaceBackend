@@ -1,26 +1,45 @@
 const { Schema, model } = require("mongoose");
 
-// TODO: Please make sure you edit the User model to whatever makes sense in this case
-const userSchema = new Schema(
+const recordLabelSchema = new Schema(
   {
+    companyName: {
+      type: String,
+      required: [true, 'A company name is required.']
+    },
     email: {
       type: String,
-      required: [true, 'Email is required.'],
+      required: [true, 'An email is required.'],
       unique: true,
       lowercase: true,
       trim: true
     },
     password: {
       type: String,
-      required: [true, 'Password is required.']
-    }
+      required: [true, 'A password is required.']
+    },
+    logo: {
+      type: String,
+      required: false
+    },
+    location: {
+      type: String,
+      required: false
+    },
+    aboutUs: {
+      type: String,
+      required: false
+    },
+    associatedActs: {
+      type: String,
+      trim: true,
+      required: false
+    },
   },
   {
-    // this second object adds extra properties: `createdAt` and `updatedAt`    
     timestamps: true
   }
 );
 
-const User = model("User", userSchema);
+const RecordLabel = model("RecordLabel", recordLabelSchema);
 
-module.exports = User;
+module.exports = RecordLabel;

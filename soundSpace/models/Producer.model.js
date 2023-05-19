@@ -1,26 +1,55 @@
 const { Schema, model } = require("mongoose");
 
-// TODO: Please make sure you edit the User model to whatever makes sense in this case
-const userSchema = new Schema(
+const producerSchema = new Schema(
   {
+    name: {
+      type: String,
+      required: [true, 'A name is required.']
+    },
     email: {
       type: String,
-      required: [true, 'Email is required.'],
+      required: [true, 'An email is required.'],
       unique: true,
       lowercase: true,
       trim: true
     },
     password: {
       type: String,
-      required: [true, 'Password is required.']
-    }
+      required: [true, 'A password is required.']
+    },
+    picture: {
+      type: String,
+      required: false
+    },
+    location: {
+      type: String,
+      required: false
+    },
+    aboutMe: {
+      type: String,
+      required: false
+    },
+    associatedActs: {
+      type: [String],
+      trim: true,
+      required: false
+    },
+    genre: {
+      type: String,
+      enum: ['Rock', 'Pop', 'Jazz', 'Hip Hop', 'Classical', 'Electronic', 'Country', 'R&B', 'Reggae', 'Alternative', 'Metal'],
+      required: false
+    },
+    favoriteProducers: {
+      type: [Schema.Types.ObjectId],
+      ref: "Producer",
+      required: false,
+    },
   },
-  {
-    // this second object adds extra properties: `createdAt` and `updatedAt`    
+  {  
     timestamps: true
   }
 );
 
-const User = model("User", userSchema);
+const Producer = model("Producer", producerSchema);
 
-module.exports = User;
+module.exports = Producer;

@@ -21,7 +21,6 @@ const reviewSchema = new Schema(
     created: { type: Date, default: Date.now },
   },
   {
-    // this second object adds extra properties: `createdAt` and `updatedAt`
     timestamps: true,
   }
 );
