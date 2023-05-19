@@ -1,22 +1,42 @@
 const { Schema, model } = require("mongoose");
 
-// TODO: Please make sure you edit the User model to whatever makes sense in this case
-const userSchema = new Schema(
+const recordLabelSchema = new Schema(
   {
+    companyName: {
+      type: String,
+      required: [true, 'A company name is required.']
+    },
     email: {
       type: String,
-      required: [true, 'Email is required.'],
+      required: [true, 'An email is required.'],
       unique: true,
       lowercase: true,
       trim: true
     },
     password: {
       type: String,
-      required: [true, 'Password is required.']
+      required: [true, 'A password is required.']
+    },
+    Picture: {
+      type: String,
+      required: false
+    },
+    Location: {
+      type: String,
+    },
+    aboutMe: {
+      type: String,
+    },
+    associatedActs: {
+      type: String,
+      trim: true
+    },
+    genre: {
+      type: String,
+      enum: ['Rock', 'Pop', 'Jazz', 'Hip Hop', 'Classical', 'Electronic', 'Country', 'R&B', 'Reggae', 'Alternative', 'Metal']
     }
   },
-  {
-    // this second object adds extra properties: `createdAt` and `updatedAt`    
+  {  
     timestamps: true
   }
 );
