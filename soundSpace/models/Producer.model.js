@@ -23,17 +23,21 @@ const producerSchema = new Schema(
     },
     location: {
       type: String,
+      required: false
     },
     aboutMe: {
       type: String,
+      required: false
     },
     associatedActs: {
       type: String,
-      trim: true
+      trim: true,
+      required: false
     },
     genre: {
       type: String,
-      enum: ['Rock', 'Pop', 'Jazz', 'Hip Hop', 'Classical', 'Electronic', 'Country', 'R&B', 'Reggae', 'Alternative', 'Metal']
+      enum: ['Rock', 'Pop', 'Jazz', 'Hip Hop', 'Classical', 'Electronic', 'Country', 'R&B', 'Reggae', 'Alternative', 'Metal'],
+      required: false
     }
   },
   {  

@@ -23,13 +23,16 @@ const recordLabelSchema = new Schema(
     },
     location: {
       type: String,
+      required: false
     },
     aboutUs: {
       type: String,
+      required: false
     },
     associatedActs: {
       type: String,
-      trim: true
+      trim: true,
+      required: false
     },
   },
   {
