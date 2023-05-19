@@ -30,7 +30,7 @@ const producerSchema = new Schema(
       required: false
     },
     associatedActs: {
-      type: String,
+      type: [String],
       trim: true,
       required: false
     },
@@ -38,7 +38,12 @@ const producerSchema = new Schema(
       type: String,
       enum: ['Rock', 'Pop', 'Jazz', 'Hip Hop', 'Classical', 'Electronic', 'Country', 'R&B', 'Reggae', 'Alternative', 'Metal'],
       required: false
-    }
+    },
+    favoriteProducers: {
+      type: [Schema.Types.ObjectId],
+      ref: "Producer",
+      required: false,
+    },
   },
   {  
     timestamps: true
