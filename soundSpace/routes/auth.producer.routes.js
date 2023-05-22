@@ -2,23 +2,26 @@ const router = require("express").Router();
 
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { isAuthenticated } = require("../middleware/jwt.middleware");
 
 const Producer = require("../models/Producer.model");
 
+const { isAuthenticated } = require("../middleware/jwt.middleware");
+
 //GET signup producer page
-router.get("/signup/producer", (req, res, next) => {
+router.get("/signup", (req, res, next) => {
   res.json({ message: "Signup page for producers" });
 });
 
 //POST to signup as Producer
-router.post("/signup/producer", async (req, res) => {
+router.post("/signup", async (req, res) => {
   // Password format validation regex pattern
   const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
   // Validate password format
-  if (!passwordPattern.test(req.body.password)) {
-    return res.status(400).json({ message: "Invalid password format" });
-  }
+  console.log('made it here', req.body)
+
+ /*  if (!passwordPattern.test(req.body.password)) {
+    return res.status(400).json({ message: "Password must contain at least 8 characters, and include at least one lowercase letter, one uppercase letter and one number" });
+  } */
   try {
     // Check if the Producer already exists
     const existingProducer = await Producer.findOne({
