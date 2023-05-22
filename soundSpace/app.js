@@ -17,10 +17,15 @@ require("./config")(app);
 // 👇 Start handling routes here
 const indexRoutes = require("./routes/index.routes");
 app.use("/api", indexRoutes);
+
 const authProducerRoutes = require("./routes/auth.producer.routes")
 app.use("/auth", authProducerRoutes)
-const authRecordLabelRoutes = require("./routes/auth.recordlabel.routes")
-app.use("/auth", authRecordLabelRoutes)
+
+const producerRoutes = require("./routes/producers.routes")
+app.use("/profile", producerRoutes)
+
+const jobRoutes = require("./routes/job.routes")
+app.use("/jobs", jobRoutes)
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);

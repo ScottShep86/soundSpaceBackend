@@ -1,24 +1,63 @@
-const router = require("express").Router();
-const Producer = require('../models/Producer.model');
+const router = require("express").Router()
 
-//GET all producers
-router.get("/producers", async (req, res, next) => {
+const Job = require("../models/Job.model")
+const Producer = require("../models/Producer.model")
+
+const { isAuthenticated } = require("../middleware/jwt.middleware");
+
+//GET route to profile page
+router.get("/", isAuthenticated, async (req, res, next) => {
     try {
-        const response = await Producer.find();
-        res.send({ data: response });
+       res.json("I am a producer") 
     } catch (error) {
         console.error(error)
     }
 })
 
-//GET one producer
-router.get("/producers/:producerId", async (req, res) => {
+
+//GET route to display the profile to the Producer
+router.get("/profile", isAuthenticated, async (req, res, next) => {
     try {
-        const producer = await Producer.findById(req.params.producerId)
-        res.status(200).json(producer)
+        const allJobs = await Job.find({createdBy: req.producer._id})
+        res.status(200).json(allJobs)
     } catch (error) {
         console.error(error)
     }
 })
 
-module.exports = router;
+//PUT to edit my profile
+/* router.put("profile/:profileId", isAuthenticated, async (req, res, next) => {
+    try {
+      const editProfile = req.params.profileId;
+      const updatedProfile = await Producer.findByIdAndUpdate(
+        { _id: editProfile, createdBy: req.producer._id },
+        { $set: req.body },
+        { new: true }
+      );
+      if (!updatedProfile) {
+        return res
+          .status(404)
+          .json({ message: "Unauthorized access" });
+      }
+      res.status(200).json(updatedProfile);
+    } catch (error) {
+      console.error(error);
+    }
+  });
+
+  // DELETE to delete a profile
+router.delete("profile/:profileId", isAuthenticated, async (req, res, next) => {
+    try {
+      const profileId = req.params.jobId;
+      const deletedProfile = await Producer.findOneAndDelete({ _id: profileId, createdBy: req.producer.id });
+      if (!deletedProfile) {
+        return res.status(404).json({ message: 'Profile not found or unauthorized access' });
+      }
+      res.status(200).json({ message: 'Profile successfully deleted' });
+    } catch (error) {
+      console.error(error);
+      next(error);
+    }
+  }); */
+
+  module.exports = router;
