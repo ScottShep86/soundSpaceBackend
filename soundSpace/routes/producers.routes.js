@@ -6,24 +6,26 @@ const Producer = require("../models/Producer.model")
 const { isAuthenticated } = require("../middleware/jwt.middleware");
 
 //GET route to profile page
-router.get("/", isAuthenticated, async (req, res, next) => {
+router.get("/:id", isAuthenticated, async (req, res, next) => {
     try {
-       res.json("I am a producer") 
+        const {id} = req.params
+        const producer = await Producer.findById(id)
+        res.status(200).json(producer)
     } catch (error) {
         console.error(error)
     }
 })
 
 
-//GET route to display the profile to the Producer
-router.get("/profile", isAuthenticated, async (req, res, next) => {
-    try {
-        const allJobs = await Job.find({createdBy: req.producer._id})
-        res.status(200).json(allJobs)
-    } catch (error) {
-        console.error(error)
-    }
-})
+// //GET route to display the profile to the Producer
+// router.get("/profile", isAuthenticated, async (req, res, next) => {
+//     try {
+//         const allJobs = await Job.find({createdBy: req.producer._id})
+//         res.status(200).json(allJobs)
+//     } catch (error) {
+//         console.error(error)
+//     }
+// })
 
 //PUT to edit my profile
 /* router.put("profile/:profileId", isAuthenticated, async (req, res, next) => {
