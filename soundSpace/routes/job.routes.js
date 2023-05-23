@@ -25,10 +25,11 @@ router.get("/:jobId", isAuthenticated, async (req, res, next) => {
 });
 
 //POST to create a job
-router.post("/", async (req, res, next) => {
+router.post("/", isAuthenticated, async (req, res, next) => {
   const payload = req.body
+  /* console.log(req.music) */
   try {
-    const newJob = await Job.create(payload);
+    const newJob = await Job.create({...payload, createdBy: req.music.producerId});
     res.status(201).json(newJob);
   } catch (error) {
     console.error(error);
@@ -40,7 +41,7 @@ router.put("/:jobId", isAuthenticated, async (req, res, next) => {
   try {
     const editJob = req.params.jobId;
     const updatedJob = await Job.findByIdAndUpdate(
-      { _id: editJob, createdBy: req.producer.id },
+      { _id: editJob, createdBy: req.music.producerId },
       { $set: req.body },
       { new: true }
     );
