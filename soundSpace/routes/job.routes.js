@@ -5,7 +5,7 @@ const Job = require("../models/Job.model");
 const { isAuthenticated } = require("../middleware/jwt.middleware");
 
 //GET all the posted jobs
-router.get("/jobs", isAuthenticated, async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const allJobs = await Job.find();
     res.status(200).json(allJobs);
@@ -15,7 +15,7 @@ router.get("/jobs", isAuthenticated, async (req, res, next) => {
 });
 
 //GET one job
-router.get("/jobs/:jobId", isAuthenticated, async (req, res, next) => {
+router.get("/:jobId", isAuthenticated, async (req, res, next) => {
   try {
     const oneJob = await Job.findById(req.params.jobId);
     res.status(200).json(oneJob);
@@ -25,9 +25,10 @@ router.get("/jobs/:jobId", isAuthenticated, async (req, res, next) => {
 });
 
 //POST to create a job
-router.post("/jobs", isAuthenticated, async (req, res, next) => {
+router.post("/", async (req, res, next) => {
+  const payload = req.body
   try {
-    const newJob = await Job.find({ ...req.body, createdBy: req.producer.id });
+    const newJob = await Job.create(payload);
     res.status(201).json(newJob);
   } catch (error) {
     console.error(error);
@@ -35,7 +36,7 @@ router.post("/jobs", isAuthenticated, async (req, res, next) => {
 });
 
 //PUT to edit a job
-router.put("jobs/:jobId", isAuthenticated, async (req, res, next) => {
+router.put("/:jobId", isAuthenticated, async (req, res, next) => {
   try {
     const editJob = req.params.jobId;
     const updatedJob = await Job.findByIdAndUpdate(
@@ -55,7 +56,7 @@ router.put("jobs/:jobId", isAuthenticated, async (req, res, next) => {
 });
 
 //DELETE to delete a job
-router.delete("jobs/:jobId", isAuthenticated, async (req, res, next) => {
+router.delete("/:jobId", isAuthenticated, async (req, res, next) => {
   try {
     const deleteJob = req.params.jobId;
     const deletedJob = await Job.findByIdAndDelete({

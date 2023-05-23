@@ -8,7 +8,7 @@ const jobSchema = new Schema(
     },
     createdBy: {
       type: [Schema.Types.ObjectId],
-      ref: "Producer",
+      ref: 'Producer', 
       required: true,
     },
     location: {
