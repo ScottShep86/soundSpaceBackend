@@ -6,7 +6,7 @@ const Producer = require("../models/Producer.model")
 const { isAuthenticated } = require("../middleware/jwt.middleware");
 
 //GET route to profile page
-router.get("/:id", isAuthenticated, async (req, res, next) => {
+router.get("/", isAuthenticated, async (req, res, next) => {
     try {
         const {id} = req.params
         const producer = await Producer.findById(id)

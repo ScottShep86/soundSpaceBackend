@@ -62,7 +62,7 @@ router.delete("/:jobId", isAuthenticated, async (req, res, next) => {
     const deleteJob = req.params.jobId;
     const deletedJob = await Job.findByIdAndDelete({
       _id: deleteJob,
-      createdBy: req.producer.id,
+      createdBy: req.music.producerId,
     });
     if (!deletedJob) {
       return res
