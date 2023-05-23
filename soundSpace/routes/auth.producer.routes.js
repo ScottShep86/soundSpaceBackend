@@ -19,9 +19,9 @@ router.post("/signup", async (req, res) => {
   // Validate password format
   console.log('made it here', req.body)
 
- /*  if (!passwordPattern.test(req.body.password)) {
+  if (!passwordPattern.test(req.body.password)) {
     return res.status(400).json({ message: "Password must contain at least 8 characters, and include at least one lowercase letter, one uppercase letter and one number" });
-  } */
+  }
   try {
     // Check if the Producer already exists
     const existingProducer = await Producer.findOne({
