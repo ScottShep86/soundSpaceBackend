@@ -31,12 +31,10 @@ router.get("/:id/jobs", isAuthenticated, async (req, res, next) => {
 //PUT to edit a job
 router.put("/:id/edit", isAuthenticated, async (req, res, next) => {
   try {
-    const editJob = req.params.jobId;
-    const updatedJob = await Job.findByIdAndUpdate(
-      { _id: editJob, createdBy: req.music.producerId },
-      { $set: req.body },
-      { new: true }
-    );
+    const {id} = req.params;
+    const updatedJob = await Job.findByIdAndUpdate(id, req.body, {new: true});
+    console.log('updated job:', updatedJob)
+
     if (!updatedJob) {
       return res
         .status(404)

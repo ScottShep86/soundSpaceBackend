@@ -30,6 +30,9 @@ app.use("/api/jobs", jobRoutes)
 const allProducersRoutes = require("./routes/allProducers.routes")
 app.use("/api/producers", allProducersRoutes)
 
+const messageRoutes = require("./routes/message.routes")
+app.use("/api/messages", messageRoutes)
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
