@@ -16,6 +16,7 @@ router.get("/:id", isAuthenticated, async (req, res, next) => {
     }
 })
 
+//GET all my posted Jobs
 router.get("/:id/jobs", isAuthenticated, async (req, res, next) => {
     /* console.log(req.music) */
   try {
@@ -26,6 +27,26 @@ router.get("/:id/jobs", isAuthenticated, async (req, res, next) => {
     console.error(error);
   }
 });
+
+//DELETE to delete a job
+router.delete("/:id/jobs", isAuthenticated, async (req, res, next) => {
+  try {
+    const {id} = req.params
+    console.log(id)
+    const deletedJob = await Job.findByIdAndDelete(
+      id
+    );
+    if (!deletedJob) {
+      return res
+        .status(404)
+        .json({ message: "Job not found or unauthorized access" });
+    }
+    res.status(200).json({ message: "Job Listing successfully deleted" });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 
 // //GET route to display the profile to the Producer
 // router.get("/profile", isAuthenticated, async (req, res, next) => {
