@@ -16,6 +16,16 @@ router.get("/:id", isAuthenticated, async (req, res, next) => {
     }
 })
 
+router.get("/:id/jobs", isAuthenticated, async (req, res, next) => {
+    /* console.log(req.music) */
+  try {
+    const {id} = req.params
+    const myJobs = await Job.find({ createdBy: id});
+    res.status(200).json(myJobs);
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 // //GET route to display the profile to the Producer
 // router.get("/profile", isAuthenticated, async (req, res, next) => {
