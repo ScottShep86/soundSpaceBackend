@@ -28,7 +28,7 @@ router.get("/:id", isAuthenticated, async (req, res, next) => {
 // })
 
 //PUT to edit my profile
-/* router.put("profile/:profileId", isAuthenticated, async (req, res, next) => {
+/* router.put("/:id/edit", isAuthenticated, async (req, res, next) => {
     try {
       const editProfile = req.params.profileId;
       const updatedProfile = await Producer.findByIdAndUpdate(
@@ -48,7 +48,7 @@ router.get("/:id", isAuthenticated, async (req, res, next) => {
   });
 
   // DELETE to delete a profile
-router.delete("profile/:profileId", isAuthenticated, async (req, res, next) => {
+router.delete("/:id", isAuthenticated, async (req, res, next) => {
     try {
       const profileId = req.params.jobId;
       const deletedProfile = await Producer.findOneAndDelete({ _id: profileId, createdBy: req.producer.id });
