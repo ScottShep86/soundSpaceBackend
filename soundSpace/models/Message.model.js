@@ -4,11 +4,11 @@ const messageSchema = new Schema(
   {
     job: {
       type: [Schema.Types.ObjectId],
-      ref: 'Job'
+      ref: "Job"
     },
     createdBy: {
       type: [Schema.Types.ObjectId],
-      ref: 'Producer', 
+      ref: "Producer" 
     },
     comment: {
       type: String,
