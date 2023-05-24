@@ -28,6 +28,26 @@ router.get("/:id/jobs", isAuthenticated, async (req, res, next) => {
   }
 });
 
+//PUT to edit a job
+router.put("/:id/edit", isAuthenticated, async (req, res, next) => {
+  try {
+    const editJob = req.params.jobId;
+    const updatedJob = await Job.findByIdAndUpdate(
+      { _id: editJob, createdBy: req.music.producerId },
+      { $set: req.body },
+      { new: true }
+    );
+    if (!updatedJob) {
+      return res
+        .status(404)
+        .json({ message: "Job not found or unauthorized access" });
+    }
+    res.status(200).json(updatedJob);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 //DELETE to delete a job
 router.delete("/:id/jobs", isAuthenticated, async (req, res, next) => {
   try {

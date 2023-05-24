@@ -36,7 +36,7 @@ router.post("/", isAuthenticated, async (req, res, next) => {
     console.error(error);
   }
 });
-
+/* 
 //PUT to edit a job
 router.put("/:jobId", isAuthenticated, async (req, res, next) => {
   try {
@@ -74,6 +74,6 @@ router.delete("/:jobId", isAuthenticated, async (req, res, next) => {
   } catch (error) {
     console.error(error);
   }
-});
+}); */
 
 module.exports = router;
