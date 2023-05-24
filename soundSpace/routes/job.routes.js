@@ -16,9 +16,10 @@ router.get("/", async (req, res, next) => {
 
 
 //GET one job
-router.get("/:jobId", isAuthenticated, async (req, res, next) => {
+router.get("/:id", isAuthenticated, async (req, res, next) => {
   try {
-    const oneJob = await Job.findById(req.params.jobId);
+    const oneJob = await Job.findById(req.params.id);
+    console.log(oneJob)
     res.status(200).json(oneJob);
   } catch (error) {
     console.error(error);
