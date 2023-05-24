@@ -7,9 +7,8 @@ const jobSchema = new Schema(
       required: true,
     },
     createdBy: {
-      type: Schema.Types.ObjectId,
+      type: [Schema.Types.ObjectId],
       ref: 'Producer', 
-      required: true,
     },
     location: {
       type: String,

@@ -14,6 +14,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+
 //GET one job
 router.get("/:jobId", isAuthenticated, async (req, res, next) => {
   try {
