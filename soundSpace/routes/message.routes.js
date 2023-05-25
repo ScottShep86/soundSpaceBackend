@@ -29,13 +29,13 @@ router.get("/", async (req, res, next) => {
     }
   }); */
   router.post("/", isAuthenticated, async (req, res) => {
-    const { id, ...payload } = req.body;
+    const { jobId, ...payload } = req.body;
     const { producerId } = req.music;
   
     try {
       const newMessage = await Message.create({
         ...payload,
-        job: id,
+        job: jobId.jobId,
         createdBy: producerId,
       });
       res.status(201).json(newMessage);
