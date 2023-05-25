@@ -6,8 +6,9 @@ const Producer = require('../models/Producer.model');
 const { isAuthenticated } = require('../middleware/jwt.middleware');
 
 //GET all the message from a specific job
-router.get("/", async (req, res, next) => {
+router.get("/:jobId", async (req, res, next) => {
     const { jobId } = req.params;
+    console.log('trying to get messages',jobId)
     try {
       const messagesFromJob = await Message.find({ job: jobId });
       res.status(200).json(messagesFromJob);
@@ -31,6 +32,7 @@ router.get("/", async (req, res, next) => {
   router.post("/", isAuthenticated, async (req, res) => {
     const { jobId, ...payload } = req.body;
     const { producerId } = req.music;
+    console.log('what im looking for',jobId)
   
     try {
       const newMessage = await Message.create({
