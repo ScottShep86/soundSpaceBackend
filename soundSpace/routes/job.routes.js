@@ -5,14 +5,35 @@ const Job = require("../models/Job.model");
 const { isAuthenticated } = require("../middleware/jwt.middleware");
 
 //GET all the posted jobs
-router.get("/", async (req, res, next) => {
+/* router.get("/", async (req, res, next) => {
   try {
     const allJobs = await Job.find();
     res.status(200).json(allJobs);
   } catch (error) {
     console.error(error);
   }
-});
+}); */
+
+router.get("/", async (req, res, next) => {
+  const { search } = req.query
+  try {
+      let filter = {}
+      if(search) {
+          filter = {location: {$regex: search, $options: "i"}}
+  /*     }
+      if(searchLocation) {
+          filter = {location: {$regex: search, $option: "i"}}
+      }
+      if(searchGenre) {
+          filter = {genre: {$regex: search, $option: "i"}} */
+      }
+      console.log(filter)
+      const allJobs = await Job.find(filter);
+      res.status(200).json(allJobs);
+  } catch (error) {
+      console.error(error)
+  }
+})
 
 
 //GET one job
